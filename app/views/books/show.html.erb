@@ -1,2 +1,16 @@
-<h1>Books#show</h1>
-<p>Find me in app/views/books/show.html.erb</p>
+<h2>Book detail</h2>
+<table class= "table">
+  <tbody>
+   <% @book.each do |book| %>
+    <tr>
+      <td></td>
+      <td><%= book.title %></td>
+      <td><%= book.body %></td>
+     <% if @book.user == current_user %>
+      <td><%= link_to"Edit",  edit_book_path(params_id) %></td>
+      <td><%=link_to"Destroy", book_path(@book),method: :delete %></td>
+     <% end %>
+    </tr>
+   <% end %>
+  </tbody>
+</table>
