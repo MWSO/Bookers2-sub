@@ -1,9 +1,17 @@
+<%= render "info", user: @user %>
+
 <h2>Book detail</h2>
 <table class= "table">
   <tbody>
    <% @book.each do |book| %>
     <tr>
       <td></td>
+      <td>
+        <%= link_to "", user_path(book.user_id) do %>
+        <%= image_tag @book.user %> <br>
+        <%= @book.user.name %>
+        <% end %>
+      </td>
       <td><%= book.title %></td>
       <td><%= book.body %></td>
      <% if @book.user == current_user %>
