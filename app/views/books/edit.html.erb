@@ -1,4 +1,14 @@
 <h2>Editing Book</h2>
+
+<% if @book.errors.any? %>
+ <%= @book.errors.count %>errors
+ <ul>
+   <% @book.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+ </ul>
+<% end %>
+
 <%= form_with model: @book do |f| %>
  <label for ="inputTitle">本のタイトル</label>
  <%= f.text_field :title, autofocus: true, id: "inputTitle", placeholder: "本のタイトル" %>
