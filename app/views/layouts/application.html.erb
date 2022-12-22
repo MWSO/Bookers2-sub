@@ -11,6 +11,8 @@
   </head>
 
   <body>
+    <div>
+    </div>
     <header>
      <ul>
       <% if user_signed_in? %>
@@ -42,7 +44,9 @@
       <% end %>
      </ul>
     </header>
-
+    <div>
+     <%= flash[:notice] %>
+    </div>
     <%= yield %>
   </body>
 

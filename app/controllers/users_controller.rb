@@ -8,6 +8,7 @@ class UsersController < ApplicationController
     @book = Book.new(book_params)
     @book.user_id = current_user.id
     if @book.save
+     flash[:notice] = "Book was successfully created."
      redirect_to books_path
     else
      @create_book = Book.new
@@ -36,6 +37,7 @@ class UsersController < ApplicationController
   def update
    @user = User.find(params[:id])
    if @user.update(user_params)
+    flash[:notice] = "User was successfully updated."
     redirect_to user_path(@user.id)
    else
     render :edit
@@ -48,7 +50,7 @@ private
   end
 
   def is_matching_login_user
-    user_id = User.find(params[:id])
+    user_id = User.find(params[:id]).id
     login_user_id = current_user.id
     if(user_id != login_user_id)
      redirect_to users_path
