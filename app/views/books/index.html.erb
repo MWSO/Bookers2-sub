@@ -1,4 +1,13 @@
-<%= render "info", user: @user %>
+<%= render "info", user: @current_user, book: @create_book %>
+
+<% if @create_book.errors.any? %>
+ <%= @create_book.errors.count %>errors
+ <ul>
+   <% @create_book.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+ </ul>
+ <% end %>
 
 <h2>Books</h2>
 <table class = "table">
@@ -14,10 +23,16 @@
   <tbody>
     <% @books.each do |book| %>
     <tr>
-      <td><%= image_tag book.user.get_profile_image(100,100) %></td>
-      <%= link_to"", book_path(params_id) do %>
-      <td><%= book.title %></td>
+    <td>
+      <%= link_to user_path(book.user.id) do %>
+      <%= image_tag book.user.get_profile_image(100,100) %>
       <% end %>
+    </td>
+    <td>
+       <%= link_to book_path(book.id) do %>
+     　<%= book.title %>
+      <% end %>
+    </td>
       <td><%= book.body %></td>
     </tr>
     <% end %>

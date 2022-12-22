@@ -1,4 +1,4 @@
-<%= render "info", user: @user %>
+<%= render "books/info", user: @current_user, book: @create_book %>
 
 <h2>Books</h2>
 <table class="table">
@@ -14,13 +14,17 @@
   <tbody>
   <% @books.each do |book| %>
   <tr>
-    <%= link_to user_path(user.id) do %>
-    <td><%= image_tag book.user.get_profile_image(100,100) %></td>
+  <td>
+    <%= link_to user_path(user_session) do %>
+    <%= image_tag book.user.get_profile_image(100,100) %>
     <% end %>
+  </td>
+  <td>
     <%= link_to book_path(book.id) do %>
-    <td><%= book.title %></td>
+    　<%= book.title %>
     <% end %>
-    <td><%= book.body %></td>
+  </td>
+  <td><%= book.body %></td>
   </tr>
   <% end %>
   </tbody>

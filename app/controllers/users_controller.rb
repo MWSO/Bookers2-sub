@@ -1,21 +1,39 @@
 class UsersController < ApplicationController
+ before_action :authenticate_user!
+ before_action :is_matching_login_user, only: [:edit, :update]
+
+
+
+  def create
+    @book = Book.new(book_params)
+    @book.user_id = current_user.id
+    if @book.save
+     redirect_to books_path
+    else
+     @create_book = Book.new
+     @books = Book.all
+     render "books/index"
+    end
+  end
 
  def index
     @users = User.all
+    @current_user = current_user
+    @create_book = Book.new
  end
 
  def show
     @user = User.find(params[:id])
     @books = @user.books
+    @current_user = @user
+    @create_book = Book.new
  end
 
   def edit
-    is_matching_login_user
     @user = User.find(params[:id])
   end
 
   def update
-   is_matching_login_user
    @user = User.find(params[:id])
    if @user.update(user_params)
     redirect_to user_path(@user.id)
