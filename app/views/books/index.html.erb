@@ -1,15 +1,16 @@
 <%= render "info", user: @current_user, book: @create_book %>
 
+<h2>Books</h2>
+
 <% if @create_book.errors.any? %>
  <%= @create_book.errors.count %>errors
  <ul>
    <% @create_book.errors.full_messages.each do |message| %>
     <li><%= message %></li>
-    <% end %>
+   <% end %>
  </ul>
  <% end %>
 
-<h2>Books</h2>
 <table class = "table">
   <thead>
    <tr>

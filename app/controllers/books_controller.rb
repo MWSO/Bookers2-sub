@@ -12,7 +12,7 @@ class BooksController < ApplicationController
     if @book.save
      redirect_to books_path
     else
-     @create_book = Book.new
+     @create_book = @book
      @books = Book.all
      render :index
     end
@@ -55,7 +55,7 @@ private
   end
 
   def is_matching_login_user
-    user_id = params[:id].to_i
+    user_id =Book.find(params[:id]).user.id
     login_user_id = current_user.id
     if(user_id != login_user_id)
      redirect_to users_path
