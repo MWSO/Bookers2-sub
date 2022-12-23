@@ -11,8 +11,8 @@
         <tr>
           <td></td>
           <td>
-            <%= link_to user_path(user_session) do %>
-            <%= image_tag @book.user %> <br>
+            <%= link_to user_path(@book.user) do %>
+            <%= image_tag @book.user.get_profile_image(100,100) %> <br>
             <%= @book.user.name %>
             <% end %>
           </td>

@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     @book.user_id = current_user.id
     if @book.save
      flash[:notice] = "Book was successfully created."
-     redirect_to books_path
+     redirect_to book_path(@book.id)
     else
      @create_book = Book.new
      @books = Book.all
@@ -26,7 +26,6 @@ class UsersController < ApplicationController
  def show
     @user = User.find(params[:id])
     @books = @user.books
-    @current_user = @user
     @create_book = Book.new
  end
 
@@ -53,7 +52,7 @@ private
     user_id = User.find(params[:id]).id
     login_user_id = current_user.id
     if(user_id != login_user_id)
-     redirect_to users_path
+     redirect_to user_path(current_user.id)
     end
   end
 
